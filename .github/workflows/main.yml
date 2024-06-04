@@ -2,7 +2,7 @@ name: LianTong_AutoSign
 
 on:
   schedule:
-    - cron: '32 0 * * *'
+    - cron: '41 0 * * *'
     # cron表达式,9点执行一次，actions任务时区为UTC时区。 
 
 jobs:
