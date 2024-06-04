@@ -1,0 +1,33 @@
+name: LianTong_AutoSign
+
+on:
+  schedule:
+    - cron: '32 0 * * *'
+    # cron表达式,9点执行一次，actions任务时区为UTC时区。 
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+          pip install pycryptodome
+      
+      - name: Run script
+        env:
+          PHONE: ${{ secrets.PHONE }}
+          PHONE_PWD: ${{ secrets.PHONE_PWD }}
+          MAIL: ${{ secrets.MAIL }}
+          MAIL_PWD: ${{ secrets.MAIL_PWD }}
+        run: |
+          python auto_sign.py
+          
